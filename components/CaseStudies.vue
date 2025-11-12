@@ -2,10 +2,10 @@
   <section id="case-studies" class="py-24 bg-white">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 animate-fade-up">
           Cas clients
         </h2>
-        <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto animate-fade-up animate-delay-100">
           Des résultats concrets pour des métiers variés
         </p>
       </div>
@@ -14,7 +14,8 @@
         <div
           v-for="(caseStudy, index) in cases"
           :key="index"
-          class="bg-slate-50 rounded-2xl p-8 border-2 border-slate-100 hover:border-cyan-200 transition-all duration-300 hover:shadow-xl"
+          class="bg-slate-50 rounded-2xl p-8 border-2 border-slate-100 hover:border-cyan-200 transition-all duration-300 hover:shadow-xl animate-fade-up"
+          :style="{ animationDelay: `${index * 0.1 + 0.2}s` }"
         >
           <div class="flex items-start gap-4 mb-6">
             <div :class="['w-12 h-12 rounded-lg bg-gradient-to-br flex items-center justify-center flex-shrink-0', caseStudy.color]">
@@ -57,7 +58,7 @@
                 <span
                   v-for="(result, idx) in caseStudy.results"
                   :key="idx"
-                  class="px-3 py-1 bg-white rounded-full text-sm font-medium text-slate-700 border border-slate-200"
+                  class="px-3 py-1 bg-white rounded-full text-sm font-medium text-slate-700 border border-slate-200 chip-animate"
                 >
                   {{ result }}
                 </span>
@@ -68,12 +69,12 @@
       </div>
 
       <div class="mt-16 text-center">
-        <p class="text-lg text-slate-600 mb-6">
+        <p class="text-lg text-slate-600 mb-6 animate-fade-up">
           Votre projet est unique. Créons ensemble la solution qui vous correspond.
         </p>
         <button
-          @click="scrollToContact"
-          class="px-8 py-4 bg-slate-900 text-white rounded-lg font-semibold text-lg hover:bg-slate-800 transition-all duration-300"
+          @click="goToContact"
+          class="px-8 py-4 bg-slate-900 text-white rounded-lg font-semibold text-lg hover:bg-slate-800 interactive-hover animate-fade-up animate-delay-100"
         >
           Parlez-nous de votre métier
         </button>
@@ -83,6 +84,7 @@
 </template>
 
 <script setup lang="ts">
+import { navigateTo } from '#app';
 import { Car, UtensilsCrossed, Hammer, Building2 } from 'lucide-vue-next';
 
 const cases = [
@@ -140,8 +142,8 @@ const cases = [
   }
 ];
 
-const scrollToContact = () => {
-  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+const goToContact = () => {
+  navigateTo('/contact');
 };
 </script>
 

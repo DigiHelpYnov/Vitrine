@@ -4,10 +4,10 @@
 
     <div class="container mx-auto px-6 relative z-10">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-up">
           Notre Process
         </h2>
-        <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+        <p class="text-xl text-slate-300 max-w-2xl mx-auto animate-fade-up animate-delay-100">
           Une méthodologie éprouvée pour transformer vos idées en solutions concrètes
         </p>
       </div>
@@ -16,7 +16,8 @@
         <div
           v-for="(step, index) in steps"
           :key="index"
-          class="relative mb-12 last:mb-0"
+          class="relative mb-12 last:mb-0 animate-fade-up"
+          :style="{ animationDelay: `${index * 0.1 + 0.15}s` }"
         >
           <div v-if="index < steps.length - 1" class="hidden md:block absolute left-[31px] top-20 w-0.5 h-full bg-gradient-to-b from-cyan-500 to-transparent"></div>
 
@@ -49,12 +50,12 @@
 
       <div class="mt-16 text-center">
         <div class="inline-block bg-cyan-500/10 backdrop-blur-sm rounded-2xl p-8 border border-cyan-500/20">
-          <p class="text-lg text-slate-300 mb-6 max-w-2xl">
+          <p class="text-lg text-slate-300 mb-6 max-w-2xl animate-fade-up">
             Chaque projet est unique. Notre approche agile nous permet de nous adapter à vos contraintes et d'ajuster le calendrier selon vos priorités.
           </p>
           <button
-            @click="scrollToContact"
-            class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white rounded-lg font-semibold text-lg hover:shadow-xl hover:shadow-cyan-500/25 transition-all duration-300"
+            @click="goToContact"
+            class="px-8 py-4 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 text-white rounded-lg font-semibold text-lg interactive-hover interactive-gradient animate-fade-up animate-delay-100"
           >
             Démarrons votre projet
           </button>
@@ -65,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import { navigateTo } from '#app';
 import { Search, Palette, Code, TestTube, Rocket } from 'lucide-vue-next';
 
 const steps = [
@@ -105,8 +107,8 @@ const steps = [
   }
 ];
 
-const scrollToContact = () => {
-  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+const goToContact = () => {
+  navigateTo('/contact');
 };
 </script>
 

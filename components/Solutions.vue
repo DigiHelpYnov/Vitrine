@@ -2,10 +2,10 @@
   <section id="solutions" class="py-24 bg-slate-50">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 animate-fade-up">
           Nos Solutions
         </h2>
-        <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto animate-fade-up animate-delay-100">
           Des outils digitaux conçus pour répondre précisément à vos enjeux métiers
         </p>
       </div>
@@ -14,7 +14,8 @@
         <div
           v-for="(solution, index) in solutions"
           :key="index"
-          class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 hover:border-cyan-200 hover:-translate-y-1"
+          class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-slate-100 hover:border-cyan-200 hover:-translate-y-1 interactive-hover animate-fade-up"
+          :style="{ animationDelay: `${index * 0.08 + 0.15}s` }"
         >
           <div :class="['w-14 h-14 rounded-xl bg-gradient-to-br flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300', solution.color]">
             <component :is="solution.icon" :size="28" class="text-white" />
@@ -32,8 +33,8 @@
 
       <div class="text-center mt-16">
         <button
-          @click="scrollToContact"
-          class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white rounded-lg font-semibold text-lg hover:shadow-xl hover:shadow-cyan-500/25 transition-all duration-300"
+          @click="goToContact"
+          class="px-8 py-4 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 text-white rounded-lg font-semibold text-lg interactive-hover interactive-gradient animate-fade-up animate-delay-200"
         >
           Discutons de votre projet
         </button>
@@ -43,6 +44,7 @@
 </template>
 
 <script setup lang="ts">
+import { navigateTo } from '#app';
 import { Database, Workflow, Layers, BarChart3, Zap, Smartphone } from 'lucide-vue-next';
 
 const solutions = [
@@ -84,8 +86,8 @@ const solutions = [
   }
 ];
 
-const scrollToContact = () => {
-  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+const goToContact = () => {
+  navigateTo('/contact');
 };
 </script>
 

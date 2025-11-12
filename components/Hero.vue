@@ -7,40 +7,45 @@
 
     <div class="container mx-auto px-6 relative z-10">
       <div class="max-w-5xl mx-auto text-center">
-        <div class="flex justify-center mb-8">
+        <div class="flex justify-center mb-8 animate-fade-up">
           <div class="p-4 bg-cyan-500/10 rounded-2xl backdrop-blur-sm border border-cyan-500/20">
             <Code2 :size="48" class="text-cyan-400" />
           </div>
         </div>
 
-        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-fade-up animate-delay-100">
           Des solutions digitales <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">sur mesure</span> pour booster votre activité
         </h1>
 
-        <p class="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+        <p class="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-up animate-delay-200">
           CRM, ERP, intégrations complexes et automatisations intelligentes.
           Nous transformons vos défis métiers en outils performants.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up animate-delay-300">
           <button
-            @click="scrollToContact"
-            class="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white rounded-lg font-semibold text-lg hover:shadow-xl hover:shadow-cyan-500/25 transition-all duration-300 flex items-center gap-2"
+            @click="goToContact"
+            class="group px-8 py-4 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 text-white rounded-lg font-semibold text-lg flex items-center gap-2 interactive-hover interactive-gradient"
           >
             Obtenir un devis gratuit
             <ArrowRight :size="20" class="group-hover:translate-x-1 transition-transform" />
           </button>
 
           <button
-            @click="scrollToContact"
-            class="px-8 py-4 bg-white/5 backdrop-blur-sm text-white rounded-lg font-semibold text-lg border border-white/10 hover:bg-white/10 transition-all duration-300"
+            @click="goToContact"
+            class="px-8 py-4 bg-white/5 backdrop-blur-sm text-white rounded-lg font-semibold text-lg border border-white/10 hover:bg-white/10 interactive-hover"
           >
             Réserver un appel
           </button>
         </div>
 
         <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-          <div v-for="(stat, index) in stats" :key="index" class="text-center">
+          <div
+            v-for="(stat, index) in stats"
+            :key="index"
+            class="text-center animate-fade-up"
+            :style="{ animationDelay: `${index * 0.12 + 0.35}s` }"
+          >
             <div class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 mb-2">
               {{ stat.value }}
             </div>
@@ -59,6 +64,7 @@
 </template>
 
 <script setup lang="ts">
+import { navigateTo } from '#app';
 import { Code2, ArrowRight } from 'lucide-vue-next';
 
 const stats = [
@@ -68,8 +74,8 @@ const stats = [
   { value: '5 ans', label: "D'expérience" }
 ];
 
-const scrollToContact = () => {
-  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+const goToContact = () => {
+  navigateTo('/contact');
 };
 </script>
 

@@ -43,13 +43,14 @@
         <div>
           <h3 class="text-white font-bold text-lg mb-6">Navigation</h3>
           <ul class="space-y-3">
-            <li v-for="item in navigation" :key="item.id">
-              <button
-                @click="scrollToSection(item.id)"
-                class="hover:text-cyan-400 transition-colors duration-200"
+            <li v-for="(item, index) in navigation" :key="item.to">
+              <NuxtLink
+                :to="item.to"
+                class="hover:text-cyan-400 transition-colors duration-200 animate-fade-up"
+                :style="{ animationDelay: `${index * 0.06 + 0.1}s` }"
               >
                 {{ item.label }}
-              </button>
+              </NuxtLink>
             </li>
           </ul>
         </div>
@@ -79,12 +80,12 @@
               </a>
             </li>
           </ul>
-          <button
-            @click="scrollToSection('contact')"
-            class="mt-6 w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-emerald-500 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300"
+          <NuxtLink
+            to="/contact"
+            class="mt-6 block w-full px-6 py-3 bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 text-white text-center rounded-lg font-semibold hover:shadow-lg hover:shadow-cyan-500/25 interactive-hover interactive-gradient"
           >
             Obtenir un devis
-          </button>
+          </NuxtLink>
         </div>
       </div>
 
@@ -95,7 +96,8 @@
             <span
               v-for="(tech, index) in technologies"
               :key="index"
-              class="px-3 py-1 bg-slate-800 text-slate-300 rounded-full text-sm hover:bg-slate-700 transition-colors duration-200"
+              class="px-3 py-1 bg-slate-800 text-slate-300 rounded-full text-sm hover:bg-slate-700 transition-colors duration-200 chip-animate animate-fade-up"
+              :style="{ animationDelay: `${index * 0.04 + 0.15}s` }"
             >
               {{ tech }}
             </span>
@@ -129,12 +131,9 @@ import { Code2, Mail, Phone, Linkedin, Github, Twitter } from 'lucide-vue-next';
 const currentYear = new Date().getFullYear();
 
 const navigation = [
-  { label: 'Accueil', id: 'hero' },
-  { label: 'Solutions', id: 'solutions' },
-  { label: 'Cas clients', id: 'case-studies' },
-  { label: 'Process', id: 'process' },
-  { label: 'Vision', id: 'vision' },
-  { label: 'Contact', id: 'contact' }
+  { label: 'Accueil', to: '/' },
+  { label: 'Offre', to: '/solutions' },
+  { label: 'Contact', to: '/contact' }
 ];
 
 const services = [
@@ -152,8 +151,5 @@ const technologies = [
   'Tailwind CSS', 'Express', 'FastAPI', 'GraphQL', 'REST API'
 ];
 
-const scrollToSection = (sectionId: string) => {
-  document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-};
 </script>
 

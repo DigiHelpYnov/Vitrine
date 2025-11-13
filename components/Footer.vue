@@ -7,7 +7,7 @@
             <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-lg flex items-center justify-center">
               <Code2 :size="24" class="text-white" />
             </div>
-            <span class="text-xl font-bold text-white">DevAgency</span>
+            <span class="text-xl font-bold text-white">Numéa</span>
           </div>
           <p class="text-slate-400 mb-6 leading-relaxed">
             Solutions digitales sur mesure pour transformer vos défis métiers en opportunités de croissance.

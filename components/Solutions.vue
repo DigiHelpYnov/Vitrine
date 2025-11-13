@@ -196,7 +196,7 @@ const solutions = [
   },
   {
     type: 'heading',
-    title: 'Créa'
+    title: 'Design'
   },
   {
     type: 'solution',

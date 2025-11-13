@@ -35,18 +35,6 @@
                 </div>
               </div>
 
-              <!-- <div class="flex items-start gap-4">
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center flex-shrink-0">
-                  <Phone :size="24" class="text-white" />
-                </div>
-                <div>
-                  <div class="font-semibold text-slate-900 mb-1">Téléphone</div>
-                  <a href="tel:+33123456789" class="text-cyan-600 hover:text-cyan-700">
-                    +33 1 23 45 67 89
-                  </a>
-                </div>
-              </div> -->
-
               <div class="flex items-start gap-4 animate-fade-up" :style="{ animationDelay: '0.25s' }">
                 <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 flex items-center justify-center flex-shrink-0">
                   <MapPin :size="24" class="text-white" />
@@ -61,16 +49,7 @@
               </div>
             </div>
 
-            <!-- <div class="pt-8 border-t border-slate-200">
-              <button
-                @click="openCalendar"
-                class="w-full flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 interactive-hover animate-fade-up animate-delay-300"
-              >
-                <Calendar :size="20" />
-                Réserver un appel découverte
-              </button>
-            </div> -->
-          </div>
+            </div>
 
           <div class="lg:col-span-3">
             <div v-if="submitted" class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-12 text-center animate-fade-up">
@@ -148,23 +127,44 @@
 
               <div class="mb-6">
                 <label for="projectType" class="block text-sm font-semibold text-slate-700 mb-2">
-                  Type de projet *
+                  Type de projet * 
                 </label>
-                <select
-                  v-model="formData.projectType"
-                  id="projectType"
-                  required
-                class="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 form-field"
-                >
-                  <option value="">Sélectionnez une option</option>
-                  <option value="crm">CRM personnalisé</option>
-                  <option value="erp">ERP interne</option>
-                  <option value="integration">Intégration web</option>
-                  <option value="dashboard">Tableau de bord</option>
-                  <option value="automation">Automatisation</option>
-                  <option value="app">Application web/mobile</option>
-                  <option value="other">Autre</option>
-                </select>
+                
+                <div class="w-full flex flex-wrap items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-lg focus-within:ring-2 focus-within:ring-cyan-500 focus-within:border-transparent transition-all duration-200">
+                  
+                  <span 
+                    v-for="projectValue in formData.projectTypes" 
+                    :key="projectValue"
+                    class="flex items-center bg-cyan-100 text-cyan-800 text-sm font-medium px-2.5 py-1 rounded-full"
+                  >
+                    <span>{{ getLabelForValue(projectValue) }}</span>
+                    <button 
+                      @click.prevent="removeProjectType(projectValue)"
+                      type="button"
+                      class="ml-1.5 flex-shrink-0 text-cyan-600 hover:text-cyan-800 focus:outline-none"
+                      aria-label="Supprimer"
+                    >
+                      <X :size="16" />
+                    </button>
+                  </span>
+                  
+                  <select
+                    v-model="selectedOption"
+                    @change="addProjectType"
+                    id="projectType"
+                    class="flex-1 bg-transparent border-none focus:ring-0 focus:outline-none p-1 min-w-[200px]"
+                  >
+                    <option value="" disabled>Ajoutez un type de projet...</option>
+                    <option
+                      v-for="option in projectOptions"
+                      :key="option.value"
+                      :value="option.value"
+                      :disabled="formData.projectTypes.includes(option.value)"
+                    >
+                      {{ option.label }}
+                    </option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-6">
@@ -203,20 +203,55 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { Mail, Phone, MapPin, Send, Calendar, CheckCircle2 } from 'lucide-vue-next';
+import { Mail, Phone, MapPin, Send, Calendar, CheckCircle2, X } from 'lucide-vue-next';
+
+const projectOptions = ref([
+  { value: 'crm', label: 'CRM personnalisé' },
+  { value: 'erp', label: 'ERP interne' },
+  { value: 'integration', label: 'Intégration web' },
+  { value: 'dashboard', label: 'Tableau de bord' },
+  { value: 'automation', label: 'Automatisation' },
+  { value: 'app', label: 'Application web/mobile' },
+  { value: 'other', label: 'Autre' }
+]);
 
 const formData = ref({
   name: '',
   email: '',
   company: '',
   phone: '',
-  projectType: '',
+  projectTypes: [] as string[],
   message: ''
 });
 
+const selectedOption = ref("");
+
 const submitted = ref(false);
 
+const addProjectType = () => {
+  const value = selectedOption.value;
+  if (value && !formData.value.projectTypes.includes(value)) {
+    formData.value.projectTypes.push(value);
+  }
+  selectedOption.value = "";
+};
+
+const removeProjectType = (typeToRemove: string) => {
+  formData.value.projectTypes = formData.value.projectTypes.filter(
+    (type) => type !== typeToRemove
+  );
+};
+
+const getLabelForValue = (value: string) => {
+  return projectOptions.value.find(opt => opt.value === value)?.label || value;
+};
+
 const handleSubmit = () => {
+  if (formData.value.projectTypes.length === 0) {
+    alert('Veuillez sélectionner au moins un type de projet.');
+    return;
+  }
+
   console.log('Form submitted:', formData.value);
   submitted.value = true;
   setTimeout(() => {
@@ -226,7 +261,7 @@ const handleSubmit = () => {
       email: '',
       company: '',
       phone: '',
-      projectType: '',
+      projectTypes: [],
       message: ''
     };
   }, 3000);
@@ -236,4 +271,3 @@ const openCalendar = () => {
   window.open('https://calendly.com', '_blank');
 };
 </script>
-

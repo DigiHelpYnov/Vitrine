@@ -111,7 +111,7 @@
                   />
                 </div>
 
-                <div>
+                <!-- <div>
                   <label for="phone" class="block text-sm font-semibold text-slate-700 mb-2">
                     Téléphone
                   </label>
@@ -122,7 +122,7 @@
                     class="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 form-field"
                     placeholder="+33 6 12 34 56 78"
                   />
-                </div>
+                </div> -->
               </div>
 
               <div class="mb-6">

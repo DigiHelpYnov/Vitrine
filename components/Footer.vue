@@ -4,10 +4,7 @@
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <div>
           <div class="flex items-center gap-3 mb-6">
-            <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-emerald-500 rounded-lg flex items-center justify-center">
-              <Code2 :size="24" class="text-white" />
-            </div>
-            <span class="text-xl font-bold text-white">DevAgency</span>
+            <img src="/public/logo1.png" alt="Numéa" class="h-20 w-20" />Numéa 
           </div>
           <p class="text-slate-400 mb-6 leading-relaxed">
             Solutions digitales sur mesure pour transformer vos défis métiers en opportunités de croissance.
@@ -70,13 +67,7 @@
             <li class="flex items-start gap-3">
               <Mail :size="20" class="text-cyan-400 flex-shrink-0 mt-0.5" />
               <a href="mailto:contact@agence-dev.fr" class="hover:text-cyan-400 transition-colors duration-200">
-                contact@agence-dev.fr
-              </a>
-            </li>
-            <li class="flex items-start gap-3">
-              <Phone :size="20" class="text-cyan-400 flex-shrink-0 mt-0.5" />
-              <a href="tel:+33123456789" class="hover:text-cyan-400 transition-colors duration-200">
-                +33 1 23 45 67 89
+                numea.projet@gmail.com
               </a>
             </li>
           </ul>
@@ -106,7 +97,7 @@
 
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
           <p>
-            {{ currentYear }} DevAgency. Tous droits réservés.
+            {{ currentYear }} Numéa. Tous droits réservés.
           </p>
           <div class="flex gap-6">
             <a href="#" class="hover:text-cyan-400 transition-colors duration-200">
@@ -126,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import { Code2, Mail, Phone, Linkedin, Github, Twitter } from 'lucide-vue-next';
+import { Mail, Linkedin, Github, Twitter } from 'lucide-vue-next';
 
 const currentYear = new Date().getFullYear();
 
@@ -152,4 +143,3 @@ const technologies = [
 ];
 
 </script>
-

@@ -2,10 +2,8 @@
   <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
     <div class="container mx-auto flex items-center justify-between px-6 py-4">
       <NuxtLink to="/" class="flex items-center gap-3 text-lg font-semibold text-slate-900 interactive-hover" @click="closeMenu">
-        <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-emerald-500 text-white shadow-lg">
-          DH
-        </span>
-        DigiHelp
+        <img src="/public/logo1.png" alt="Numéa" class="h-20 w-20" />
+        Numéa
       </NuxtLink>
 
       <nav class="hidden items-center gap-6 text-sm font-medium text-slate-600 lg:flex">

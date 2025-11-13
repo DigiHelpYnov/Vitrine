@@ -1,6 +1,6 @@
 <template>
-  <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
-    <div class="container mx-auto flex items-center justify-between px-6 py-4">
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/60 backdrop-blur">
+    <div class="container mx-auto flex items-center justify-between px-10 py-4">
       <NuxtLink to="/" class="flex items-center gap-3 text-lg font-semibold text-slate-900 interactive-hover" @click="closeMenu">
         <img src="/public/logo1.png" alt="Numéa" class="h-20 w-20" />
         Numéa
@@ -18,7 +18,7 @@
         </NuxtLink>
         <NuxtLink
           to="/contact"
-          class="rounded-full bg-slate-900 px-5 py-2 text-white transition hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+          class="rounded-full bg-slate-900 px-8 py-2 text-white transition hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
         >
           Nous contacter
         </NuxtLink>
@@ -75,8 +75,7 @@ const isMenuOpen = ref(false);
 
 const links = [
   { label: 'Accueil', to: '/' },
-  { label: 'Offre', to: '/solutions' },
-  { label: 'Contact', to: '/contact' }
+  { label: 'Offre', to: '/solutions' }
 ] as const;
 
 const toggleMenu = () => {
